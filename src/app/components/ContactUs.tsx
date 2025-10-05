@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState,ReactNode } from "react";
 import { Mail, Phone, MapPin, Clock, Send, Copy, Check, Linkedin, Github, Instagram } from "lucide-react";
 
 type Errors = {
@@ -8,7 +8,10 @@ type Errors = {
   message?: string;
   agree?: string;
 };
-
+export interface InfoRowProps {      // export if used elsewhere
+  icon: ReactNode;
+  children: ReactNode;
+}
 
 export default function ContactPage() {
 
@@ -47,7 +50,11 @@ export default function ContactPage() {
           body: JSON.stringify(form),
         });
         const data = await res.json();
-        setStatus("Thanks! Your message has been sent ✅");
+        if(res.ok){
+          setStatus("Thanks! Your message has been sent ✅");
+        }else{
+          setStatus("Something went wrong ❌ Please try again later.");
+        }
       } catch (error) {
         console.error(error);
         setStatus("Something went wrong ❌ Please try again later.");
@@ -214,7 +221,7 @@ export default function ContactPage() {
             <div className="mt-6 space-y-3">
               <details className="group rounded-xl border border-white/10 bg-black/40 p-4">
                 <summary className="cursor-pointer select-none list-none font-medium">How fast do you reply?</summary>
-                <p className="mt-2 text-sm text-white/70">We typically respond within 1 business day. Urgent? Add "[URGENT]" to your subject.</p>
+                <p className="mt-2 text-sm text-white/70">We typically respond within 1 business day. Urgent? Add &quot;[URGENT]&quot; to your subject.</p>
               </details>
               <details className="group rounded-xl border border-white/10 bg-black/40 p-4">
                 <summary className="cursor-pointer select-none list-none font-medium">Do you offer free consultations?</summary>
@@ -240,7 +247,7 @@ export default function ContactPage() {
   );
 }
 
-function InfoRow({ icon, children }) {
+export function InfoRow({ icon, children }:InfoRowProps) {
   return (
     <div className="flex items-center gap-3 text-white/80">
       <span className="inline-flex size-9 items-center justify-center rounded-xl border border-white/10 bg-black/50">
