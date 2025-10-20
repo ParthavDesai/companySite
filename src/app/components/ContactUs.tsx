@@ -21,7 +21,7 @@ export default function ContactPage() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
 
-  const email = "pdtechconsultancy@gmail.com"; // <-- change me
+  const email = "pdtechconsultancysolutions@gmail.com"; // <-- change me
   const phone = "+1 (647)-924-5182"; // <-- change me
   const address = "123 King St W, Toronto, ON"; // <-- change me
 
@@ -36,34 +36,40 @@ export default function ContactPage() {
     return Object.keys(e).length === 0;
   };
 
-  const onSubmit = async (e:React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-      e.preventDefault();
-      setLoading(true);
-      setStatus(null);
   
-      try {
-        const res = await fetch("/api/send-email", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        });
-        const data = await res.json();
-        if(res.ok){
-          setStatus("Thanks! Your message has been sent ✅");
-        }else{
-          setStatus("Something went wrong ❌ Please try again later.");
-        }
-      } catch (error) {
-        console.error(error);
+    setLoading(true);
+    setStatus(null);
+  
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+  
+      const data = await res.json();
+  
+      if (res.ok) {
+        setStatus("Thanks! Your message has been sent ✅");
+        alert("Thanks! Your message has been sent ✅");
+        setForm({ name: "", email: "", topic: "General", message: "", company: "", agree: false });
+      } else {
+        console.error(data);
         setStatus("Something went wrong ❌ Please try again later.");
-      } finally {
-        setLoading(false);
+        alert("Something went wrong ❌ Please try again later.");
       }
-    alert(status);
-    setForm({ name: "", email: "", topic: "General", message: "", company: "", agree: false });
+    } catch (error) {
+      console.error(error);
+      setStatus("Something went wrong ❌ Please try again later.");
+      alert("Something went wrong ❌ Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
+  
 
   const copyEmail = async () => {
     try {
