@@ -7,7 +7,7 @@ export default function HomePage() {
       <div className="relative z-10 text-center">
         {/* Heading */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-transparent bg-clip-text animate-gradient-text mb-4 leading-tight">
-          PDTECH CONSULTANCY
+          PNDTECH
         </h1>
         <h2 className="text-lg sm:text-2xl md:text-4xl font-semibold text-white px-2">
           WHERE INNOVATION MEETS EXCELLENCE

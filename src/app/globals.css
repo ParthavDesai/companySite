@@ -5,6 +5,10 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
+  width: 100%;
+  overscroll-behavior: none; /* disables the bounce */
+  background-color: #f9fafb;
 }
 
 @keyframes gradient-move {

@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-8">
           {/* Logo */}
           <div className="text-white text-lg font-bold">
-            <Image src="/logo5.png" alt="Logo" width={90} height={90} />
+            <Image src="/logo5.png" alt="PNDTech Logo" width={90} height={90} />
           </div>
 
           {/* Navigation Links */}
